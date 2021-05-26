@@ -1,10 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include "GameField.h"
+#include "FieldDrawer.h"
 
 int main()
-{
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+{    
+    FieldDrawer field(GameField(10, 10, 5));
+    sf::RenderWindow window(sf::VideoMode(field.getScreenWidth(), field.getScreenHeight()), "Campo minado");
 
     while (window.isOpen())
     {
@@ -16,7 +18,7 @@ int main()
         }
 
         window.clear();
-        window.draw(shape);
+        field.drawField(window);        
         window.display();
     }
  
