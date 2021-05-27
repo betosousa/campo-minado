@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <utility>
+
 
 /// <summary>
 /// Classe que representa um campo de jogo
@@ -8,14 +10,21 @@
 class GameField
 {
 private:
-	int _bombs;
+	int _totalBombs;
 	int _columns, _rows;
+
+	std::vector<std::pair<int, int>> _bombs;
 	bool* tiles;
+
 	/// <summary>
 	/// Retorna o indice no array de tiles relativo ao (x, y) do bloco
 	/// </summary>
 	/// <returns></returns>
 	int tilesIndex(int x, int y) const;
+	/// <summary>
+	/// Verifica se a posição pertence ao vetor de bombas
+	/// </summary>
+	bool isBomb(int x, int y) const;
 public:
 	GameField(int columns, int rows, int bombs);
 	~GameField();
