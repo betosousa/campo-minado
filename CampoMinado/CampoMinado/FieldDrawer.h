@@ -30,5 +30,11 @@ public:
 	/// </summary>
 	/// <param name="window">tela de jogo</param>
 	void drawField(sf::RenderWindow &window);
+
+	/// <summary>
+	/// Abre um bloco de acordo com a posição na tela
+	/// </summary>
+	/// <param name="screenPos"></param>
+	void open(sf::Vector2i screenPos);
 };
 

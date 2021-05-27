@@ -15,6 +15,10 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (event.type == sf::Event::MouseButtonReleased) 
+                field.open(sf::Mouse::getPosition(window));
+            
         }
 
         window.clear();

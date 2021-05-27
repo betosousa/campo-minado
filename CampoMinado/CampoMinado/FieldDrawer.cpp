@@ -29,7 +29,12 @@ void FieldDrawer::drawField(sf::RenderWindow &window) {
     for (int j = 0; j < _gameField.getRows(); j++) {
         for (int i = 0; i < _gameField.getColumns(); i++) {
             _block.setPosition(i * (_blockWidth + padding), j * (_blockHeight + padding));
+            _block.setFillColor(_gameField.getColor(i, j));
             window.draw(_block);
         }
     }
+}
+
+void FieldDrawer::open(sf::Vector2i screenPos) {
+    _gameField.open(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
 }
