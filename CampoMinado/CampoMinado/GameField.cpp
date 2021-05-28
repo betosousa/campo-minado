@@ -1,6 +1,5 @@
 #include "GameField.h"
 
-
 GameField::GameField(int columns, int rows, int bombs) {
 	_columns = columns;
 	_rows = rows;
@@ -16,19 +15,20 @@ GameField::GameField(int columns, int rows, int bombs) {
 	for (int i = 0; i < columns * rows; i++)
 		board[i] = 0;
 
+	std::set<std::pair<int, int>> bombsSet;
 	// inicializa bombas aleatoriamente
-	while (_bombs.size() < _totalBombs)
+	while (bombsSet.size() < _totalBombs)
 	{
 		int x = rand() % columns, y = rand() % rows;
-		_bombs.insert(std::pair<int, int>(x, y));
+		bombsSet.insert(std::pair<int, int>(x, y));
 	}
 	
-	for (std::set<std::pair<int, int>>::iterator itr = _bombs.begin(); itr != _bombs.end(); itr++) {
-		board[tilesIndex(itr->first, itr->second)] = -1;
+	for (std::set<std::pair<int, int>>::iterator itr = bombsSet.begin(); itr != bombsSet.end(); itr++) {
+		board[tilesIndex(itr->first, itr->second)] = BOMB;
 		// percorre vizinhos de bombas e adiciona 1
 		for (int i = itr->first - 1; i <= itr->first + 1; i++) {
 			for (int j = itr->second - 1; j <= itr->second + 1; j++) {
-				if (i >= 0 && i < columns && j >= 0 && j < rows && board[tilesIndex(i, j)] > -1) {
+				if (i >= 0 && i < columns && j >= 0 && j < rows && board[tilesIndex(i, j)] != BOMB) {
 					board[tilesIndex(i, j)] += 1;
 				}
 			}
@@ -81,12 +81,7 @@ void GameField::open(int x, int y) {
 }
 
 bool GameField::isBomb(int x, int y) const {
-	for (std::set<std::pair<int, int>>::iterator itr = _bombs.begin(); itr != _bombs.end(); itr++) {
-		if (itr->first == x && itr->second == y) {
-			return true;
-		}
-	}
-	return false;
+	return board[tilesIndex(x, y)] == BOMB;
 }
 
 std::string GameField::getBoard(int x, int y) {

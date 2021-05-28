@@ -4,6 +4,7 @@
 #include <utility>
 #include <set>
 
+#define BOMB -1
 
 /// <summary>
 /// Classe que representa um campo de jogo
@@ -14,8 +15,6 @@ private:
 	int _totalBombs;
 	int _columns, _rows;
 
-	std::set<std::pair<int, int>> _bombs;
-	
 	bool* tiles;
 	int* board;
 
