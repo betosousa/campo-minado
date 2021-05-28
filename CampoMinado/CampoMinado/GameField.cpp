@@ -15,8 +15,9 @@ GameField::GameField(int columns, int rows, int bombs) {
 	for (int i = 0; i < columns * rows; i++)
 		board[i] = EMPTY;
 
-	std::set<std::pair<int, int>> bombsSet;
 	// inicializa bombas aleatoriamente
+	srand(time(NULL));
+	std::set<std::pair<int, int>> bombsSet;
 	while (bombsSet.size() < _totalBombs)
 	{
 		int x = rand() % columns, y = rand() % rows;
