@@ -13,7 +13,7 @@ GameField::GameField(int columns, int rows, int bombs) {
 	// inicializa campo com total de bombas adjacentes
 	board = new int[columns * rows];
 	for (int i = 0; i < columns * rows; i++)
-		board[i] = 0;
+		board[i] = EMPTY;
 
 	std::set<std::pair<int, int>> bombsSet;
 	// inicializa bombas aleatoriamente
@@ -61,15 +61,15 @@ sf::Color GameField::getColor(int x, int y) const {
 	else  return isBomb(x, y) ? sf::Color::Red : sf::Color::Cyan;
 }
 
-void GameField::open(int x, int y) {
+bool GameField::open(int x, int y) {
 	// se ja estiver aberto, retorna
-	if (tiles[tilesIndex(x, y)]) return;
+	if (tiles[tilesIndex(x, y)]) return false;
 	
 	// abre tile atual
 	tiles[tilesIndex(x, y)] = true;
 	
 	// se tile for vazio, percorre vizinhos
-	if (board[tilesIndex(x, y)] == 0) {
+	if (board[tilesIndex(x, y)] == EMPTY) {
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {
 				if (i >= 0 && i < _columns && j >= 0 && j < _rows) {
@@ -78,6 +78,7 @@ void GameField::open(int x, int y) {
 			}
 		}
 	}
+	return isBomb(x, y);
 }
 
 bool GameField::isBomb(int x, int y) const {

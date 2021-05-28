@@ -44,6 +44,6 @@ void FieldDrawer::drawField(sf::RenderWindow &window) {
     }
 }
 
-void FieldDrawer::open(sf::Vector2i screenPos) {
-    _gameField.open(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
+bool FieldDrawer::open(sf::Vector2i screenPos) {
+    return _gameField.open(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
 }

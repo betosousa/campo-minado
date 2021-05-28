@@ -35,9 +35,9 @@ public:
 	void drawField(sf::RenderWindow &window);
 
 	/// <summary>
-	/// Abre um bloco de acordo com a posição na tela
+	/// Abre um bloco de acordo com a posição na tela, retornando se o jogo acabou 
 	/// </summary>
 	/// <param name="screenPos"></param>
-	void open(sf::Vector2i screenPos);
+	bool open(sf::Vector2i screenPos);
 };
 

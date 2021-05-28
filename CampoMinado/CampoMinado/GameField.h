@@ -5,6 +5,7 @@
 #include <set>
 
 #define BOMB -1
+#define EMPTY 0
 
 /// <summary>
 /// Classe que representa um campo de jogo
@@ -38,9 +39,9 @@ public:
 	/// </summary>
 	sf::Color getColor(int x, int y) const;
 	/// <summary>
-	/// Abre um tile no campo
+	/// Abre um tile no campo, retornando true caso o tile seja uma bomba 
 	/// </summary>
-	void open(int x, int y);
+	bool open(int x, int y);
 	/// <summary>
 	/// Retorna texto com total de bombas adjacentes
 	/// </summary>
