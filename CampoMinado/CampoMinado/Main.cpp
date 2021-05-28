@@ -5,7 +5,7 @@
 
 int main()
 {    
-    FieldDrawer field(GameField(10, 10, 5));
+    FieldDrawer field(GameField(10, 10, 10));
     sf::RenderWindow window(sf::VideoMode(field.getScreenWidth(), field.getScreenHeight()), "Campo minado");
 
     while (window.isOpen())

@@ -16,6 +16,9 @@ private:
 	/// propriedades
 	GameField _gameField;
 	sf::RectangleShape _block;
+	sf::Text _text;
+	sf::Font _font;
+
 	float _blockWidth, _blockHeight;
 
 public:

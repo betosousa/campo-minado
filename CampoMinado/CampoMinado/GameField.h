@@ -17,6 +17,7 @@ private:
 	std::set<std::pair<int, int>> _bombs;
 	
 	bool* tiles;
+	int* board;
 
 	/// <summary>
 	/// Retorna o indice no array de tiles relativo ao (x, y) do bloco
@@ -41,5 +42,9 @@ public:
 	/// Abre um tile no campo
 	/// </summary>
 	void open(int x, int y);
+	/// <summary>
+	/// Retorna texto com total de bombas adjacentes
+	/// </summary>
+	std::string getBoard(int x, int y);
 };
 

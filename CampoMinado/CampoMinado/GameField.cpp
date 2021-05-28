@@ -6,17 +6,34 @@ GameField::GameField(int columns, int rows, int bombs) {
 	_rows = rows;
 	_totalBombs = bombs;
 	
+	// inicializa os tiles como blocos fechados
+	tiles = new bool[columns * rows];
+	for (int i = 0; i < columns * rows; i++)
+		tiles[i] = false;
+	
+	// inicializa campo com total de bombas adjacentes
+	board = new int[columns * rows];
+	for (int i = 0; i < columns * rows; i++)
+		board[i] = 0;
+
 	// inicializa bombas aleatoriamente
 	while (_bombs.size() < _totalBombs)
 	{
 		int x = rand() % columns, y = rand() % rows;
 		_bombs.insert(std::pair<int, int>(x, y));
 	}
-
-	// inicializa os tiles como blocos fechados
-	tiles = new bool[columns * rows];
-	for (int i = 0; i < columns * rows; i++)
-		tiles[i] = false;
+	
+	for (std::set<std::pair<int, int>>::iterator itr = _bombs.begin(); itr != _bombs.end(); itr++) {
+		board[tilesIndex(itr->first, itr->second)] = -1;
+		// percorre vizinhos de bombas e adiciona 1
+		for (int i = itr->first - 1; i <= itr->first + 1; i++) {
+			for (int j = itr->second - 1; j <= itr->second + 1; j++) {
+				if (i >= 0 && i < columns && j >= 0 && j < rows && board[tilesIndex(i, j)] > -1) {
+					board[tilesIndex(i, j)] += 1;
+				}
+			}
+		}
+	}
 }
 
 GameField::~GameField() {
@@ -55,4 +72,11 @@ bool GameField::isBomb(int x, int y) const {
 		}
 	}
 	return false;
+}
+
+std::string GameField::getBoard(int x, int y) {
+	if (tiles[tilesIndex(x, y)]) {
+		return board[tilesIndex(x, y)] > 0 ? std::to_string(board[tilesIndex(x, y)]) : "";
+	}
+	return "";
 }
