@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <utility>
+#include <set>
 
 
 /// <summary>
@@ -13,7 +14,8 @@ private:
 	int _totalBombs;
 	int _columns, _rows;
 
-	std::vector<std::pair<int, int>> _bombs;
+	std::set<std::pair<int, int>> _bombs;
+	
 	bool* tiles;
 
 	/// <summary>

@@ -1,14 +1,16 @@
 #include "GameField.h"
 
+
 GameField::GameField(int columns, int rows, int bombs) {
 	_columns = columns;
 	_rows = rows;
 	_totalBombs = bombs;
 	
-	_bombs = std::vector<std::pair<int, int>>(bombs, std::pair<int, int>());
-	for (int i = 0; i < _totalBombs; i++) {
-		_bombs[i].first = i;
-		_bombs[i].second = i;
+	// inicializa bombas aleatoriamente
+	while (_bombs.size() < _totalBombs)
+	{
+		int x = rand() % columns, y = rand() % rows;
+		_bombs.insert(std::pair<int, int>(x, y));
 	}
 
 	// inicializa os tiles como blocos fechados
@@ -47,8 +49,8 @@ void GameField::open(int x, int y) {
 }
 
 bool GameField::isBomb(int x, int y) const {
-	for (int i = 0; i < _totalBombs; i++) {
-		if (_bombs[i].first == x && _bombs[i].second == y) {
+	for (std::set<std::pair<int, int>>::iterator itr = _bombs.begin(); itr != _bombs.end(); itr++) {
+		if (itr->first == x && itr->second == y) {
 			return true;
 		}
 	}
