@@ -62,7 +62,22 @@ sf::Color GameField::getColor(int x, int y) const {
 }
 
 void GameField::open(int x, int y) {
+	// se ja estiver aberto, retorna
+	if (tiles[tilesIndex(x, y)]) return;
+	
+	// abre tile atual
 	tiles[tilesIndex(x, y)] = true;
+	
+	// se tile for vazio, percorre vizinhos
+	if (board[tilesIndex(x, y)] == 0) {
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (i >= 0 && i < _columns && j >= 0 && j < _rows) {
+					open(i, j);
+				}
+			}
+		}
+	}
 }
 
 bool GameField::isBomb(int x, int y) const {
