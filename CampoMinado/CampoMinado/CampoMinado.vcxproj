@@ -145,11 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="FieldDrawer.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="FieldDrawer.h" />
     <ClInclude Include="GameField.h" />
   </ItemGroup>
