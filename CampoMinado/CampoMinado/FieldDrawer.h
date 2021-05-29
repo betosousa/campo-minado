@@ -45,5 +45,9 @@ public:
 	/// </summary>
 	/// <param name="screenPos"></param>
 	void changeFlag(sf::Vector2i screenPos);
+	/// <summary>
+	/// Reinicia a partida
+	/// </summary>
+	void restart();
 };
 

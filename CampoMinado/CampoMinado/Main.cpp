@@ -2,6 +2,9 @@
 #include <iostream>
 #include "GameField.h"
 #include "FieldDrawer.h"
+#include "Button.h"
+
+#include <iostream>
 
 #define GAME_OVER_STRING "GAME OVER"
 
@@ -20,6 +23,13 @@ int main()
     text.setString(GAME_OVER_STRING);
     text.setPosition(field.getScreenWidth() / 4, field.getScreenHeight() / 2);
 
+    Button restartButton(font, "Restart", field.getScreenWidth() / 2, 100 + field.getScreenHeight() / 2, 100, 50, 
+        [&isGameOver, &field]() -> void {
+            std::cout << "Reiniciando" << std::endl;
+            isGameOver = false;
+            field.restart();
+        });
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -34,13 +44,18 @@ int main()
                 else if (event.mouseButton.button == sf::Mouse::Right)
                     field.changeFlag(sf::Mouse::getPosition(window));
             }
+
+            restartButton.update(event, window);
         }
 
         window.clear();
         field.drawField(window);
 
-        if (isGameOver) 
+        if (isGameOver) {
             window.draw(text);
+            restartButton.setEnabled(true);
+            restartButton.draw(window);
+        }
         
         window.display();
     }

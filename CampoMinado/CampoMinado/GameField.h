@@ -56,5 +56,9 @@ public:
 	/// Marca ou desmarca tile com bandeira
 	/// </summary>
 	void changeFlag(int x, int y);
+	/// <summary>
+	/// Reseta o campo de jogo
+	/// </summary>
+	void reset();
 };
 

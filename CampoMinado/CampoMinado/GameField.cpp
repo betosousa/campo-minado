@@ -4,38 +4,12 @@ GameField::GameField(int columns, int rows, int bombs) {
 	_columns = columns;
 	_rows = rows;
 	_totalBombs = bombs;
-	_openTiles = 0;
 
 	tiles = new bool[columns * rows];
 	board = new int[columns * rows];
 	flags = new bool[columns * rows];
-	// inicializa os tiles como blocos fechados e vazios
-	for (int i = 0; i < columns * rows; i++) {
-		tiles[i] = false;
-		board[i] = EMPTY;
-		flags[i] = false;
-	}
 
-	// inicializa bombas aleatoriamente
-	srand(time(NULL));
-	std::set<std::pair<int, int>> bombsSet;
-	while (bombsSet.size() < _totalBombs)
-	{
-		int x = rand() % columns, y = rand() % rows;
-		bombsSet.insert(std::pair<int, int>(x, y));
-	}
-	
-	for (std::set<std::pair<int, int>>::iterator itr = bombsSet.begin(); itr != bombsSet.end(); itr++) {
-		board[tilesIndex(itr->first, itr->second)] = BOMB;
-		// percorre vizinhos de bombas e adiciona 1
-		for (int i = itr->first - 1; i <= itr->first + 1; i++) {
-			for (int j = itr->second - 1; j <= itr->second + 1; j++) {
-				if (i >= 0 && i < columns && j >= 0 && j < rows && board[tilesIndex(i, j)] != BOMB) {
-					board[tilesIndex(i, j)] += 1;
-				}
-			}
-		}
-	}
+	reset();
 }
 
 GameField::~GameField() {
@@ -112,4 +86,35 @@ int GameField::getTotalOpenTiles() const {
 
 int GameField::getTotalNonBombTiles() const {
 	return _rows * _columns - _totalBombs;
+}
+
+void GameField::reset() {
+	// inicializa os tiles como blocos fechados e vazios
+	for (int i = 0; i < _columns * _rows; i++) {
+		tiles[i] = false;
+		board[i] = EMPTY;
+		flags[i] = false;
+	}
+	_openTiles = 0;
+
+	// inicializa bombas aleatoriamente
+	srand(time(NULL));
+	std::set<std::pair<int, int>> bombsSet;
+	while (bombsSet.size() < _totalBombs)
+	{
+		int x = rand() % _columns, y = rand() % _rows;
+		bombsSet.insert(std::pair<int, int>(x, y));
+	}
+
+	for (std::set<std::pair<int, int>>::iterator itr = bombsSet.begin(); itr != bombsSet.end(); itr++) {
+		board[tilesIndex(itr->first, itr->second)] = BOMB;
+		// percorre vizinhos de bombas e adiciona 1
+		for (int i = itr->first - 1; i <= itr->first + 1; i++) {
+			for (int j = itr->second - 1; j <= itr->second + 1; j++) {
+				if (i >= 0 && i < _columns && j >= 0 && j < _rows && board[tilesIndex(i, j)] != BOMB) {
+					board[tilesIndex(i, j)] += 1;
+				}
+			}
+		}
+	}
 }

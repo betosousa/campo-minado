@@ -53,3 +53,7 @@ bool FieldDrawer::open(sf::Vector2i screenPos) {
 void FieldDrawer::changeFlag(sf::Vector2i screenPos) {
     _gameField.changeFlag(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
 }
+
+void FieldDrawer::restart() {
+    _gameField.reset();
+}
