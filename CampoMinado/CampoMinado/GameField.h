@@ -7,6 +7,7 @@
 #define BOMB -1
 #define EMPTY 0
 
+
 /// <summary>
 /// Classe que representa um campo de jogo
 /// </summary>
@@ -18,6 +19,9 @@ private:
 
 	bool* tiles;
 	int* board;
+	bool* flags;
+
+	int _openTiles;
 
 	/// <summary>
 	/// Retorna o indice no array de tiles relativo ao (x, y) do bloco
@@ -34,6 +38,8 @@ public:
 	int getRows() const; 
 	int getColumns() const;
 	int getBombs() const;
+	int getTotalOpenTiles() const;
+	int getTotalNonBombTiles() const;
 	/// <summary>
 	/// Retorna a cor do bloco de acordo com o estado atual
 	/// </summary>
@@ -46,5 +52,9 @@ public:
 	/// Retorna texto com total de bombas adjacentes
 	/// </summary>
 	std::string getBoard(int x, int y);
+	/// <summary>
+	/// Marca ou desmarca tile com bandeira
+	/// </summary>
+	void changeFlag(int x, int y);
 };
 

@@ -39,5 +39,11 @@ public:
 	/// </summary>
 	/// <param name="screenPos"></param>
 	bool open(sf::Vector2i screenPos);
+
+	/// <summary>
+	/// Marca/desmarca bloco como possivel bomba
+	/// </summary>
+	/// <param name="screenPos"></param>
+	void changeFlag(sf::Vector2i screenPos);
 };
 

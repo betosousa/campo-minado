@@ -28,8 +28,12 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            if (event.type == sf::Event::MouseButtonReleased && !isGameOver) 
-                isGameOver = field.open(sf::Mouse::getPosition(window));
+            if (event.type == sf::Event::MouseButtonReleased && !isGameOver) {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                    isGameOver = field.open(sf::Mouse::getPosition(window));
+                else if (event.mouseButton.button == sf::Mouse::Right)
+                    field.changeFlag(sf::Mouse::getPosition(window));
+            }
         }
 
         window.clear();
