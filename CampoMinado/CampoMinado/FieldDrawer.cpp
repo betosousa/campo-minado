@@ -1,15 +1,15 @@
 #include "FieldDrawer.h"
 
-FieldDrawer::FieldDrawer(GameField gf) : _gameField(gf.getColumns(), gf.getRows(), gf.getBombs()) {
+FieldDrawer::FieldDrawer(sf::Font& font, unsigned int columns, unsigned int rows, unsigned int bombs, unsigned int screenWidth, unsigned int screenHeight) 
+    : _gameField(columns, rows, bombs) {
     // calcula tamanho do bloco com base no tamanho da tela
-    _blockWidth = (screenWidth - (gf.getColumns() - 1) * padding) / gf.getColumns();
-    _blockHeight = (screenHeight - (gf.getRows() - 1) * padding) / gf.getRows();
+    _blockWidth = (screenWidth - (columns - 1) * padding) / columns;
+    _blockHeight = (screenHeight - (rows - 1) * padding) / rows;
     
     _block = sf::RectangleShape(sf::Vector2f(_blockWidth, _blockHeight));
     _block.setFillColor(sf::Color::White);
 
-    _font.loadFromFile("arial.ttf");
-    _text.setFont(_font);
+    _text.setFont(font);
     _text.setCharacterSize(_blockHeight);
     _text.setFillColor(sf::Color::Black);
 }
@@ -20,14 +20,6 @@ FieldDrawer::~FieldDrawer() {
 
 GameField FieldDrawer::getGameField() const {
     return _gameField;
-}
-
-int FieldDrawer::getScreenWidth() const {
-    return screenWidth;
-}
-
-int FieldDrawer::getScreenHeight() const {
-    return screenHeight;
 }
 
 void FieldDrawer::drawField(sf::RenderWindow &window) {

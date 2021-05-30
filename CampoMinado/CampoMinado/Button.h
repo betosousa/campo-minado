@@ -7,6 +7,9 @@
 #define NORMAL_COLOR sf::Color::White
 #define PRESSED_COLOR sf::Color::Blue
 
+/// <summary>
+/// Classe que representa um botao
+/// </summary>
 class Button
 {
 private:

@@ -3,32 +3,38 @@
 #include "GameField.h"
 #include "FieldDrawer.h"
 #include "Button.h"
+#include "GameScreen.h"
 
 #include <iostream>
 
 #define GAME_OVER_STRING "GAME OVER"
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 
 int main()
 {    
-    FieldDrawer field(GameField(10, 10, 10));
-    sf::RenderWindow window(sf::VideoMode(field.getScreenWidth(), field.getScreenHeight()), "Campo minado");
-
-    bool isGameOver = false;
     sf::Font font;
-    font.loadFromFile("arial.ttf");
+    if (!font.loadFromFile("arial.ttf")) {
+        std::cerr << "Falha ao carregar fonte" << std::endl;
+    }
+    
+    sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Campo minado");
+    GameScreen gameScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT, 10, 10, 10);
+
     sf::Text text;
     text.setFont(font);
-    text.setCharacterSize(field.getScreenHeight() / std::strlen(GAME_OVER_STRING));
+    text.setCharacterSize(SCREEN_HEIGHT / std::strlen(GAME_OVER_STRING));
     text.setFillColor(sf::Color::Magenta);
     text.setString(GAME_OVER_STRING);
-    text.setPosition(field.getScreenWidth() / 4, field.getScreenHeight() / 2);
+    text.setPosition(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2);
 
-    Button restartButton(font, "Restart", field.getScreenWidth() / 2, 100 + field.getScreenHeight() / 2, 100, 50, 
-        [&isGameOver, &field]() -> void {
+    Button restartButton(font, "Restart", SCREEN_WIDTH / 2, 100 + SCREEN_HEIGHT / 2, 100, 50,
+        [&gameScreen]() -> void {
             std::cout << "Reiniciando" << std::endl;
-            isGameOver = false;
-            field.restart();
-        });
+            gameScreen.reinitGame();
+        });  
+
+    gameScreen.setActive(true);
 
     while (window.isOpen())
     {
@@ -38,20 +44,14 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            if (event.type == sf::Event::MouseButtonReleased && !isGameOver) {
-                if (event.mouseButton.button == sf::Mouse::Left)
-                    isGameOver = field.open(sf::Mouse::getPosition(window));
-                else if (event.mouseButton.button == sf::Mouse::Right)
-                    field.changeFlag(sf::Mouse::getPosition(window));
-            }
-
+            gameScreen.update(event, window);
             restartButton.update(event, window);
         }
 
         window.clear();
-        field.drawField(window);
+        gameScreen.draw(window);
 
-        if (isGameOver) {
+        if (gameScreen.isGameOver()) {
             window.draw(text);
             restartButton.setEnabled(true);
             restartButton.draw(window);
