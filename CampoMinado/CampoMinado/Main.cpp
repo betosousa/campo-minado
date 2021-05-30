@@ -36,7 +36,7 @@ int main()
             gameOverScreen.setActive(false);
             menuScreen.setActive(false);
 
-            ///gameScreen.initGame(10,10,10);
+            gameScreen.initGame(menuScreen.getColumns(), menuScreen.getRows(), menuScreen.getBombs());
         });
 
     menuScreen.setActive(true);

@@ -2,6 +2,7 @@
 
 #include "Screen.h"
 #include "Button.h"
+#include "ConfigPanel.h"
 
 #define GAME_TITLE_STRING "Mine Sweep"
 
@@ -16,6 +17,7 @@ private:
     sf::Text _text;
     sf::RectangleShape _panel;
     Button _startButton;
+    ConfigPanel _configColumns, _configRows, _configBombs;
 
 public:
     MenuScreen(sf::Font& font, unsigned int screenWidth, unsigned int screenHeight);
@@ -23,5 +25,9 @@ public:
     void update(sf::Event& event, sf::RenderWindow& window);
     void draw(sf::RenderWindow& window);
     void setStartButton(sf::Font& font, std::function<void(void)> onClick);
+    unsigned int getColumns() const;
+    unsigned int getRows() const;
+    unsigned int getBombs() const;
 };
+
 

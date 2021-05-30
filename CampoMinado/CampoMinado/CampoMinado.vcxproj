@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ConfigPanel.cpp" />
     <ClCompile Include="FieldDrawer.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameOverScreen.cpp" />
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ConfigPanel.h" />
     <ClInclude Include="FieldDrawer.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameOverScreen.h" />
