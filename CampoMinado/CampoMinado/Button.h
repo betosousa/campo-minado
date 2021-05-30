@@ -25,8 +25,8 @@ private:
 
 	bool isOverButton(sf::Vector2i screenPos);
 public:
-	Button(sf::Font& font, std::function<void(void)> onClick);
-	Button(sf::Font& font, std::string text, unsigned int x, unsigned int y, unsigned int w, unsigned int h, std::function<void(void)> onClick);
+	Button();
+	Button(std::function<void(void)> onClick);
 	~Button();
 
 	/// <summary>
@@ -53,6 +53,13 @@ public:
 	/// <param name="w">largura</param>
 	/// <param name="h">altura</param>
 	void setPosition(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
+	/// <summary>
+	/// Define o texto exibido pelo botao
+	/// </summary>
+	/// <param name="font"></param>
+	/// <param name="text"></param>
+	/// <param name="size"></param>
+	void setText(sf::Font& font, std::string text, unsigned int size);
 };
 
 enum ButtonState {

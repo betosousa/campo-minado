@@ -4,10 +4,8 @@
 #include "FieldDrawer.h"
 #include "Button.h"
 #include "GameScreen.h"
+#include "GameOverScreen.h"
 
-#include <iostream>
-
-#define GAME_OVER_STRING "GAME OVER"
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
@@ -20,21 +18,17 @@ int main()
     
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Campo minado");
     GameScreen gameScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT, 10, 10, 10);
-
-    sf::Text text;
-    text.setFont(font);
-    text.setCharacterSize(SCREEN_HEIGHT / std::strlen(GAME_OVER_STRING));
-    text.setFillColor(sf::Color::Magenta);
-    text.setString(GAME_OVER_STRING);
-    text.setPosition(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2);
-
-    Button restartButton(font, "Restart", SCREEN_WIDTH / 2, 100 + SCREEN_HEIGHT / 2, 100, 50,
+    
+    Button restartButton(
         [&gameScreen]() -> void {
             std::cout << "Reiniciando" << std::endl;
             gameScreen.reinitGame();
         });  
 
+    GameOverScreen gameOverScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT, restartButton);
+
     gameScreen.setActive(true);
+    gameOverScreen.setActive(false);
 
     while (window.isOpen())
     {
@@ -45,18 +39,15 @@ int main()
                 window.close();
 
             gameScreen.update(event, window);
-            restartButton.update(event, window);
+            gameOverScreen.update(event, window);
         }
 
         window.clear();
-        gameScreen.draw(window);
 
-        if (gameScreen.isGameOver()) {
-            window.draw(text);
-            restartButton.setEnabled(true);
-            restartButton.draw(window);
-        }
-        
+        gameScreen.draw(window);
+        gameOverScreen.setActive(gameScreen.isGameOver());
+        gameOverScreen.draw(window);
+                
         window.display();
     }
  

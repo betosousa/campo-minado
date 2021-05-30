@@ -148,6 +148,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="FieldDrawer.cpp" />
     <ClCompile Include="GameField.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="FieldDrawer.h" />
     <ClInclude Include="GameField.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Screen.h" />
   </ItemGroup>

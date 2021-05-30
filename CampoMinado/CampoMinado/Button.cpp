@@ -1,18 +1,13 @@
 #include "Button.h"
 
-Button::Button(sf::Font& font, std::string text, unsigned int x, unsigned int y, unsigned int w, unsigned int h, std::function<void(void)> onClick) {
-    _text.setFont(font);
-    _text.setCharacterSize(h / 2);
-    _text.setFillColor(sf::Color::Black);
-    _text.setString(text);
+Button::Button(std::function<void(void)> onClick) {
     _state = ButtonState::Normal;
-    setPosition(x, y, w, h);
     action = onClick;
     _isEnabled = false;
 }
 
-Button::Button(sf::Font& font, std::function<void(void)> onClick) : Button(font, "button", 0, 0, 100, 50, onClick) {
-
+Button::Button() {
+    
 }
 
 Button::~Button() {
@@ -68,4 +63,11 @@ void Button::setPosition(unsigned int x, unsigned int y, unsigned int w, unsigne
     _text.setPosition(_posX, _posY);
     _rect.setPosition(_posX, _posY);
     _rect.setSize(sf::Vector2f(_width, _height));
+}
+
+void Button::setText(sf::Font& font, std::string text, unsigned int size) {
+    _text.setFont(font);
+    _text.setCharacterSize(size);
+    _text.setFillColor(sf::Color::Black);
+    _text.setString(text);
 }
