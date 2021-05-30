@@ -15,6 +15,9 @@ private:
     FieldDrawer _field;
     bool _isGameOver;
     unsigned int _screenWidth, _screenHeight;
+    short _lifes, _maxLifes;
+    sf::Text _lifesLabel, _lifesText;
+    void initLifes(short value);
 public:
     GameScreen(sf::Font& font, unsigned int screenWidth, unsigned int screenHeight);
     ~GameScreen();

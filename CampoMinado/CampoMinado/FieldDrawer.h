@@ -52,5 +52,11 @@ public:
 	/// <param name="rows"></param>
 	/// <param name="bombs"></param>
 	void initField(unsigned int columns, unsigned int rows, unsigned int bombs);
+
+	/// <summary>
+	/// Verifica se todos os blocos foram abertos
+	/// </summary>
+	/// <returns></returns>
+	bool isAllOpen() const;
 };
 

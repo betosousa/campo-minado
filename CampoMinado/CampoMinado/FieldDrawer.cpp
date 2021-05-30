@@ -31,9 +31,7 @@ void FieldDrawer::drawField(sf::RenderWindow &window) {
 }
 
 bool FieldDrawer::open(sf::Vector2i screenPos) {
-    bool isBomb = _gameField.open(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
-    bool isAllOpen = _gameField.getTotalOpenTiles() == _gameField.getTotalNonBombTiles();
-    return isBomb || isAllOpen;
+    return _gameField.open(screenPos.x / _blockWidth, screenPos.y / _blockHeight);
 }
 
 void FieldDrawer::changeFlag(sf::Vector2i screenPos) {
@@ -56,4 +54,8 @@ void FieldDrawer::initField(unsigned int columns, unsigned int rows, unsigned in
         
     _text.setCharacterSize(_blockHeight);
     _text.setFillColor(sf::Color::Black);
+}
+
+bool FieldDrawer::isAllOpen() const {
+    return _gameField.getTotalOpenTiles() == _gameField.getTotalNonBombTiles();
 }
