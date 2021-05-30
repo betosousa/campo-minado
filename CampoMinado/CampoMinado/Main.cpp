@@ -19,7 +19,7 @@ int main()
     
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), GAME_TITLE_STRING);
     
-    GameScreen gameScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT, 10, 10, 10);
+    GameScreen gameScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT);
           
     GameOverScreen gameOverScreen(font, SCREEN_WIDTH, SCREEN_HEIGHT);
     gameOverScreen.setRestartButton(font, 
@@ -35,6 +35,8 @@ int main()
             gameScreen.setActive(true);
             gameOverScreen.setActive(false);
             menuScreen.setActive(false);
+
+            ///gameScreen.initGame(10,10,10);
         });
 
     menuScreen.setActive(true);

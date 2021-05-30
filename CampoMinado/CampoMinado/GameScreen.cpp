@@ -1,7 +1,7 @@
 #include "GameScreen.h"
 
-GameScreen::GameScreen(sf::Font& font, unsigned int screenWidth, unsigned int screenHeight, unsigned int columns, unsigned int rows, unsigned int bombs) :
-    _field(font, columns, rows, bombs, screenWidth, screenHeight) {
+GameScreen::GameScreen(sf::Font& font, unsigned int screenWidth, unsigned int screenHeight) :
+    _field(font, 10, 10, 10, screenWidth, screenHeight) {
     _isGameOver = false;
 }
 
@@ -33,4 +33,8 @@ bool GameScreen::isGameOver() const {
 void GameScreen::reinitGame() {
     _isGameOver = false;
     _field.restart();
+}
+
+void GameScreen::initGame(unsigned int columns, unsigned int rows, unsigned int bombs) {
+    _field.initField(columns, rows, bombs);
 }

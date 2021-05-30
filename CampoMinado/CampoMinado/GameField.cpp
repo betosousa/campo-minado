@@ -1,15 +1,7 @@
 #include "GameField.h"
 
 GameField::GameField(int columns, int rows, int bombs) {
-	_columns = columns;
-	_rows = rows;
-	_totalBombs = bombs;
-
-	tiles = new bool[columns * rows];
-	board = new int[columns * rows];
-	flags = new bool[columns * rows];
-
-	reset();
+	setField(columns, rows, bombs);
 }
 
 GameField::~GameField() {
@@ -117,4 +109,16 @@ void GameField::reset() {
 			}
 		}
 	}
+}
+
+void GameField::setField(int columns, int rows, int bombs) {
+	_columns = columns;
+	_rows = rows;
+	_totalBombs = bombs;
+
+	tiles = new bool[_columns * _rows];
+	board = new int[_columns * _rows];
+	flags = new bool[_columns * _rows];
+
+	reset();
 }

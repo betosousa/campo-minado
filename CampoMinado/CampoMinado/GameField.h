@@ -60,5 +60,9 @@ public:
 	/// Reseta o campo de jogo
 	/// </summary>
 	void reset();
+	/// <summary>
+	/// Define os parametros do campo
+	/// </summary>
+	void setField(int columns, int rows, int bombs);
 };
 

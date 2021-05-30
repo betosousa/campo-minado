@@ -2,16 +2,10 @@
 
 FieldDrawer::FieldDrawer(sf::Font& font, unsigned int columns, unsigned int rows, unsigned int bombs, unsigned int screenWidth, unsigned int screenHeight) 
     : _gameField(columns, rows, bombs) {
-    // calcula tamanho do bloco com base no tamanho da tela
-    _blockWidth = (screenWidth - (columns - 1) * padding) / columns;
-    _blockHeight = (screenHeight - (rows - 1) * padding) / rows;
-    
-    _block = sf::RectangleShape(sf::Vector2f(_blockWidth, _blockHeight));
-    _block.setFillColor(sf::Color::White);
-
+    _screenWidth = screenWidth; 
+    _screenHeight = screenHeight;
     _text.setFont(font);
-    _text.setCharacterSize(_blockHeight);
-    _text.setFillColor(sf::Color::Black);
+    initField(columns, rows, bombs);
 }
 
 FieldDrawer::~FieldDrawer() {
@@ -48,4 +42,18 @@ void FieldDrawer::changeFlag(sf::Vector2i screenPos) {
 
 void FieldDrawer::restart() {
     _gameField.reset();
+}
+
+void FieldDrawer::initField(unsigned int columns, unsigned int rows, unsigned int bombs) {
+    _gameField.setField(columns, rows, bombs);
+    
+    // calcula tamanho do bloco com base no tamanho da tela
+    _blockWidth = (_screenWidth - (columns - 1) * padding) / columns;
+    _blockHeight = (_screenHeight - (rows - 1) * padding) / rows;
+
+    _block = sf::RectangleShape(sf::Vector2f(_blockWidth, _blockHeight));
+    _block.setFillColor(sf::Color::White);
+        
+    _text.setCharacterSize(_blockHeight);
+    _text.setFillColor(sf::Color::Black);
 }

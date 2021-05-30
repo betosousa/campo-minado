@@ -15,6 +15,7 @@ private:
 	sf::RectangleShape _block;
 	sf::Text _text;
 	float _blockWidth, _blockHeight;
+	unsigned int _screenWidth, _screenHeight;
 
 public:
 	FieldDrawer(sf::Font& font, unsigned int columns, unsigned int rows, unsigned int bombs, unsigned int screenWidth, unsigned int screenHeight);
@@ -43,5 +44,13 @@ public:
 	/// Reinicia a partida
 	/// </summary>
 	void restart();
+
+	/// <summary>
+	/// Inicializa o campo de jogo
+	/// </summary>
+	/// <param name="columns"></param>
+	/// <param name="rows"></param>
+	/// <param name="bombs"></param>
+	void initField(unsigned int columns, unsigned int rows, unsigned int bombs);
 };
 
