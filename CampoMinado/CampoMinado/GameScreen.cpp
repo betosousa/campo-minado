@@ -28,7 +28,7 @@ void GameScreen::update(sf::Event& event, sf::RenderWindow& window) {
     if (event.type == sf::Event::MouseButtonReleased && !_isGameOver) {
         if (event.mouseButton.button == sf::Mouse::Left) {
             bool isBomb = _field.open(sf::Mouse::getPosition(window));
-            _isGameOver = _field.isAllOpen() || (isBomb && _lifes-- <= 0);
+            _isGameOver = _field.isAllOpen() || (isBomb && _lifes-- <= 1);
             _lifesText.setString(std::to_string(_lifes));
         } else if (event.mouseButton.button == sf::Mouse::Right)
             _field.changeFlag(sf::Mouse::getPosition(window));
@@ -53,9 +53,9 @@ void GameScreen::reinitGame() {
     initLifes(_maxLifes);
 }
 
-void GameScreen::initGame(unsigned int columns, unsigned int rows, unsigned int bombs) {
+void GameScreen::initGame(unsigned int columns, unsigned int rows, unsigned int bombs, short lifes) {
     _field.initField(columns, rows, bombs);
-    initLifes(3);    
+    initLifes(lifes);    
 }
 
 void GameScreen::initLifes(short value) {

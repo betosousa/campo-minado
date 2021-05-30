@@ -1,10 +1,10 @@
 #include "ConfigPanel.h"
 
 ConfigPanel::ConfigPanel(sf::Font& font, std::string label, unsigned int width, unsigned int height, unsigned int posY, unsigned int minValue, unsigned int maxValue, unsigned int value) :
-	_plusButton([&]()->void {_value = std::min(_value+1, _maxValue); }),
+	_plusButton([&]()->void {_value = std::min(_value + 1, _maxValue); }),
 	_minusButton([&]()->void {_value = std::max(_value - 1, _minValue); }) {
 	
-	_panelX = 0; _panelY = posY;
+	_panelX = 10; _panelY = posY;
 	_panelWidth = width; _panelHeight = height;
 
 	_minValue = minValue; _maxValue = maxValue;

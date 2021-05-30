@@ -31,6 +31,6 @@ public:
     /// <summary>
     /// Inicia a tela de jogo
     /// </summary>
-    void initGame(unsigned int columns, unsigned int rows, unsigned int bombs);
+    void initGame(unsigned int columns, unsigned int rows, unsigned int bombs, short lifes);
 };
 

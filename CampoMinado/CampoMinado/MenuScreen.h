@@ -17,7 +17,7 @@ private:
     sf::Text _text;
     sf::RectangleShape _panel;
     Button _startButton;
-    ConfigPanel _configColumns, _configRows, _configBombs;
+    ConfigPanel _configColumns, _configRows, _configBombs, _configLifes;
 
 public:
     MenuScreen(sf::Font& font, unsigned int screenWidth, unsigned int screenHeight);
@@ -28,6 +28,7 @@ public:
     unsigned int getColumns() const;
     unsigned int getRows() const;
     unsigned int getBombs() const;
+    unsigned short getLifes() const;
 };
 
 
